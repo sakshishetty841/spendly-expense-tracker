@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" fill="none">
+  <rect width="48" height="48" rx="14" fill="#68785F"/>
+  <circle cx="24" cy="24" r="18" fill="#87977A" opacity="0.4"/>
+  <!-- Leaf / Plant sprout combined with rupee coin motif -->
+  <path d="M24 10C24 10 32 15 32 23C32 27.4183 28.4183 31 24 31C19.5817 31 16 27.4183 16 23C16 15 24 10 24 10Z" fill="#E8DFCC" opacity="0.9"/>
+  <!-- Rupee Symbol glyph inside leaf -->
+  <path d="M20 18H28M20 21H27M23 21C25 21 26 20 26 19M23 21L27 27M23 18V27" stroke="#343B32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Sprout highlight -->
+  <path d="M24 10C25.5 13 27 17 25 21" stroke="#C5CEB8" stroke-width="1.5" stroke-linecap="round"/>
+</svg>
+

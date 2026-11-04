@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SPENDLY – Smart Personal Expense Manager for students and young adults. Track daily expenses, manage budgets, and analyze spending habits.">
+  <title>SPENDLY – Smart Expense Manager</title>
+  
+  <!-- Google Fonts: Inter & Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- Mobile Header Bar -->
+    <header class="mobile-header" aria-label="Mobile Navigation Bar">
+      <button id="mobile-menu-btn" class="icon-btn" aria-label="Toggle navigation menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+      <div class="mobile-brand">
+        <img src="assets/images/logo.svg" alt="Spendly Logo" width="30" height="30">
+        <span class="mobile-brand-title">SPENDLY</span>
+      </div>
+      <button id="mobile-theme-toggle" class="icon-btn theme-toggle-btn" aria-label="Toggle theme">
+        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"></circle>
+          <line x1="12" y1="1" x2="12" y2="3"></line>
+          <line x1="12" y1="21" x2="12" y2="23"></line>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+          <line x1="1" y1="12" x2="3" y2="12"></line>
+          <line x1="21" y1="12" x2="23" y2="12"></line>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+      </button>
+    </header>
+
+    <!-- Sidebar Overlay for mobile -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside id="sidebar" class="sidebar" aria-label="Sidebar Navigation">
+      <div class="sidebar-header">
+        <div class="brand">
+          <img src="assets/images/logo.svg" alt="Spendly Logo" class="brand-logo" width="40" height="40">
+          <div class="brand-text">
+            <h1 class="brand-title">SPENDLY</h1>
+            <p class="brand-tagline">Your money. Your control.</p>
+          </div>
+        </div>
+        <button id="sidebar-close-btn" class="sidebar-close-btn" aria-label="Close sidebar">✕</button>
+      </div>
+
+      <!-- Navigation Links -->
+      <nav class="nav-menu" aria-label="Main Navigation">
+        <a href="#dashboard" class="nav-item active" data-page="dashboard">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="3" width="7" height="7" rx="1.5"></rect>
+            <rect x="14" y="14" width="7" height="7" rx="1.5"></rect>
+            <rect x="3" y="14" width="7" height="7" rx="1.5"></rect>
+          </svg>
+          <span class="nav-label">Dashboard</span>
+        </a>
+
+        <a href="#transactions" class="nav-item" data-page="transactions">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="8" y1="6" x2="21" y2="6"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="8" y1="18" x2="21" y2="18"></line>
+            <line x1="3" y1="6" x2="3.01" y2="6"></line>
+            <line x1="3" y1="12" x2="3.01" y2="12"></line>
+            <line x1="3" y1="18" x2="3.01" y2="18"></line>
+          </svg>
+          <span class="nav-label">Transactions</span>
+        </a>
+
+        <a href="#add-expense" class="nav-item" data-page="add-expense">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="16"></line>
+            <line x1="8" y1="12" x2="16" y2="12"></line>
+          </svg>
+          <span class="nav-label">Add Expense</span>
+        </a>
+
+        <a href="#analytics" class="nav-item" data-page="analytics">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+          </svg>
+          <span class="nav-label">Analytics</span>
+        </a>
+
+        <a href="#budget" class="nav-item" data-page="budget">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 7H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
+            <path d="M16 3H8a2 2 0 0 0-2 2v2h12V5a2 2 0 0 0-2-2z"></path>
+            <circle cx="16" cy="13" r="1"></circle>
+          </svg>
+          <span class="nav-label">Budget</span>
+        </a>
+
+        <a href="#settings" class="nav-item" data-page="settings">
+          <svg class="nav-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+          <span class="nav-label">Settings</span>
+        </a>
+      </nav>
+
+      <!-- Sidebar Footer -->
+      <div class="sidebar-footer">
+        <div class="theme-switch-container">
+          <span class="theme-label">Appearance</span>
+          <button id="sidebar-theme-toggle" class="theme-toggle-btn pill-btn" aria-label="Toggle light and dark mode">
+            <span class="theme-btn-text">Light Mode</span>
+            <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="student-profile">
+          <div class="avatar">CS</div>
+          <div class="avatar-info">
+            <span class="avatar-name">Student Account</span>
+            <span class="avatar-sub">Web Tech Assignment 4</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content" id="main-content">
+      
+      <!-- Top Action Bar -->
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <h2 id="current-page-title" class="page-title">Dashboard</h2>
+          <p id="current-date-display" class="page-subtitle">Wednesday, 4 November 2026</p>
+        </div>
+        <div class="top-bar-right">
+          <button id="quick-add-btn" class="btn btn-primary quick-add-trigger">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Add Expense</span>
+          </button>
+          <button id="header-theme-toggle" class="icon-btn theme-toggle-btn header-theme-btn" aria-label="Toggle theme">
+            <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+            </svg>
+            <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- PAGE 1: DASHBOARD VIEW -->
+      <section id="view-dashboard" class="page-view active" aria-labelledby="current-page-title">
+        
+        <!-- Welcome Hero Section -->
+        <article class="welcome-card">
+          <div class="welcome-text">
+            <h3 class="welcome-greeting">Hello, Student! 👋</h3>
+            <p class="welcome-message">Let's keep your finances organized and budget on track.</p>
+          </div>
+          <div class="financial-tip-card">
+            <div class="tip-badge">💡 Financial Tip</div>
+            <p id="dashboard-tip-text" class="tip-text">"Track small daily expenses like chai and snacks—they can easily account for 25% of your monthly allowance!"</p>
+          </div>
+        </article>
+
+        <!-- 4 Summary Metric Cards -->
+        <section class="summary-cards-grid" aria-label="Key Financial Metrics">
+          <!-- Card 1: Total Expenses -->
+          <article class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Total Expenses</span>
+              <div class="metric-icon-wrap icon-sage">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="metric-body">
+              <span id="metric-total-expenses" class="metric-value">₹0</span>
+              <span class="metric-subtext">All-time recorded spend</span>
+            </div>
+          </article>
+
+          <!-- Card 2: This Month's Spending -->
+          <article class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">This Month's Spending</span>
+              <div class="metric-icon-wrap icon-beige">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+              </div>
+            </div>
+            <div class="metric-body">
+              <span id="metric-month-spending" class="metric-value">₹0</span>
+              <span id="metric-month-name" class="metric-subtext">For current month</span>
+            </div>
+          </article>
+
+          <!-- Card 3: Remaining Budget -->
+          <article class="metric-card" id="metric-budget-card">
+            <div class="metric-header">
+              <span class="metric-title">Remaining Budget</span>
+              <div class="metric-icon-wrap icon-forest">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 12V8H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12v4"></path>
+                  <path d="M4 6v12a2 2 0 0 0 2 2h14v-4"></path>
+                  <circle cx="18" cy="12" r="1"></circle>
+                </svg>
+              </div>
+            </div>
+            <div class="metric-body">
+              <span id="metric-remaining-budget" class="metric-value">₹0</span>
+              <div class="metric-status-row">
+                <span id="budget-status-badge" class="badge badge-success">On Track</span>
+                <span id="budget-limit-subtext" class="metric-subtext">Limit: ₹6,000</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4: Total Transactions -->
+          <article class="metric-card">
+            <div class="metric-header">
+              <span class="metric-title">Total Transactions</span>
+              <div class="metric-icon-wrap icon-taupe">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                  <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+              </div>
+            </div>
+            <div class="metric-body">
+              <span id="metric-total-count" class="metric-value">0</span>
+              <span class="metric-subtext">Total logged entries</span>
+            </div>
+          </article>
+        </section>
+
+        <!-- Budget Progress Bar Overview -->
+        <article class="card budget-overview-card" id="dashboard-budget-banner">
+          <div class="budget-bar-header">
+            <div class="budget-bar-info">
+              <span class="card-subtitle">Monthly Budget Utilization</span>
+              <h4 id="dashboard-budget-title" class="card-title">₹0 spent of ₹6,000 budget</h4>
+            </div>
+            <span id="dashboard-budget-pct" class="budget-pct-tag">0% Used</span>
+          </div>
+          <div class="progress-bar-track">
+            <div id="dashboard-progress-fill" class="progress-bar-fill" style="width: 0%;"></div>
+          </div>
+          <p id="dashboard-budget-alert" class="budget-alert-hint">Good job! You have 100% of your monthly budget remaining.</p>
+        </article>
+
+        <!-- Two Column Section: Category Distribution & Recent Transactions -->
+        <div class="dashboard-grid-two">
+          <!-- Left: Category Spending Visual -->
+          <article class="card">
+            <div class="card-header-row">
+              <div>
+                <h4 class="card-title">Top Spending Categories</h4>
+                <p class="card-subtitle">Category-wise breakdown of expenses</p>
+              </div>
+              <button class="text-link-btn" data-nav-target="analytics">Full Analytics →</button>
+            </div>
+            <div id="dashboard-categories-container" class="dashboard-category-list">
+              <!-- Rendered dynamically by JS -->
+            </div>
+          </article>
+
+          <!-- Right: Recent Transactions List -->
+          <article class="card">
+            <div class="card-header-row">
+              <div>
+                <h4 class="card-title">Recent Transactions</h4>
+                <p class="card-subtitle">Your latest logged expenses</p>
+              </div>
+              <button class="text-link-btn" data-nav-target="transactions">View All →</button>
+            </div>
+            <div id="dashboard-recent-list" class="recent-transactions-list">
+              <!-- Rendered dynamically by JS -->
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- PAGE 2: TRANSACTIONS VIEW (CRUD + Filter, Search, Sort) -->
+      <section id="view-transactions" class="page-view" aria-labelledby="transactions-heading">
+        <div class="view-header-row">
+          <div>
+            <h3 id="transactions-heading" class="view-heading">Expense History</h3>
+            <p class="view-subheading">View, filter, search, edit, and manage all your expense records.</p>
+          </div>
+          <div class="view-actions">
+            <button id="export-csv-btn" class="btn btn-secondary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span>Export CSV</span>
+            </button>
+            <button class="btn btn-primary quick-add-trigger">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+              </svg>
+              <span>Add Expense</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter, Search, and Sort Toolbar -->
+        <article class="card filter-toolbar-card">
+          <div class="filter-grid">
+            <!-- Search Input -->
+            <div class="filter-group search-group">
+              <label for="filter-search" class="filter-label">Search Expense</label>
+              <div class="input-icon-wrapper">
+                <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg>
+                <input type="text" id="filter-search" class="form-input search-input" placeholder="Search by title, e.g. Lunch, Book...">
+              </div>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="filter-group">
+              <label for="filter-category" class="filter-label">Category</label>
+              <select id="filter-category" class="form-select">
+                <option value="all">All Categories</option>
+                <option value="Food">Food</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Travel">Travel</option>
+                <option value="Education">Education</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Bills">Bills</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <!-- Month Filter -->
+            <div class="filter-group">
+              <label for="filter-month" class="filter-label">Month</label>
+              <select id="filter-month" class="form-select">
+                <option value="all">All Months</option>
+                <!-- Populated dynamically -->
+              </select>
+            </div>
+
+            <!-- Sort By -->
+            <div class="filter-group">
+              <label for="filter-sort" class="filter-label">Sort By</label>
+              <select id="filter-sort" class="form-select">
+                <option value="date-desc">Newest First</option>
+                <option value="date-asc">Oldest First</option>
+                <option value="amount-desc">Highest Amount</option>
+                <option value="amount-asc">Lowest Amount</option>
+              </select>
+            </div>
+
+            <!-- Reset Filters Button -->
+            <div class="filter-group filter-actions-group">
+              <label class="filter-label">&nbsp;</label>
+              <button id="reset-filters-btn" class="btn btn-secondary btn-full" title="Reset all search & filter options">
+                Reset Filters
+              </button>
+            </div>
+          </div>
+
+          <!-- Active Filter Results Summary -->
+          <div class="filter-status-row">
+            <span id="transactions-count-label" class="filter-count">Showing 0 transactions</span>
+            <span id="transactions-total-label" class="filter-total">Total: ₹0</span>
+          </div>
+        </article>
+
+        <!-- Transactions Table Container -->
+        <article class="card table-card">
+          <div class="table-responsive">
+            <table class="data-table" id="transactions-table">
+              <thead>
+                <tr>
+                  <th scope="col">Title & Notes</th>
+                  <th scope="col">Category</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Payment</th>
+                  <th scope="col" class="text-right">Amount (₹)</th>
+                  <th scope="col" class="text-center">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="transactions-tbody">
+                <!-- Rendered dynamically by JS -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Empty State -->
+          <div id="transactions-empty-state" class="empty-state hidden">
+            <div class="empty-icon-wrap">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M16 16s-1.5-2-4-2-4 2-4 2"></path>
+                <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                <line x1="15" y1="9" x2="15.01" y2="9"></line>
+              </svg>
+            </div>
+            <h4 class="empty-title">No transactions found</h4>
+            <p class="empty-desc">No expense records match your current filters or search query.</p>
+            <button class="btn btn-primary quick-add-trigger">Add New Expense</button>
+          </div>
+        </article>
+      </section>
+
+      <!-- PAGE 3: ADD / EDIT EXPENSE VIEW -->
+      <section id="view-add-expense" class="page-view" aria-labelledby="form-heading">
+        <div class="form-page-container">
+          <article class="card form-card">
+            <div class="form-card-header">
+              <div class="form-title-wrap">
+                <span class="badge badge-accent" id="form-mode-badge">New Record</span>
+                <h3 id="form-heading" class="form-heading">Add New Expense</h3>
+                <p id="form-subheading" class="form-subheading">Enter the expense details below to log your transaction.</p>
+              </div>
+              <button id="cancel-edit-btn" class="btn btn-secondary hidden" type="button">
+                Cancel Edit
+              </button>
+            </div>
+
+            <!-- Alert Notification Container for Form -->
+            <div id="form-alert" class="alert-box hidden" role="alert"></div>
+
+            <form id="expense-form" novalidate>
+              <!-- Hidden ID field for editing mode -->
+              <input type="hidden" id="expense-id" name="expense_id" aria-label="Expense ID" value="">
+
+              <div class="form-grid">
+                <!-- Title Field -->
+                <div class="form-group span-2">
+                  <label for="expense-title" class="form-label">
+                    Expense Title <span class="required-star">*</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="expense-title" 
+                    name="title" 
+                    class="form-input" 
+                    placeholder="e.g., Campus Canteen Lunch, Semester Books" 
+                    maxlength="60" 
+                    required>
+                  <span class="field-error" id="error-title"></span>
+                </div>
+
+                <!-- Amount Field -->
+                <div class="form-group">
+                  <label for="expense-amount" class="form-label">
+                    Amount (₹) <span class="required-star">*</span>
+                  </label>
+                  <div class="currency-input-wrap">
+                    <span class="currency-prefix">₹</span>
+                    <input 
+                      type="number" 
+                      id="expense-amount" 
+                      name="amount" 
+                      class="form-input has-prefix" 
+                      placeholder="0.00" 
+                      min="0.01" 
+                      step="any" 
+                      required>
+                  </div>
+                  <span class="field-error" id="error-amount"></span>
+                </div>
+
+                <!-- Category Field -->
+                <div class="form-group">
+                  <label for="expense-category" class="form-label">
+                    Category <span class="required-star">*</span>
+                  </label>
+                  <select id="expense-category" name="category" class="form-select" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="Food">🍽️ Food</option>
+                    <option value="Shopping">🛍️ Shopping</option>
+                    <option value="Travel">🚌 Travel</option>
+                    <option value="Education">📚 Education</option>
+                    <option value="Entertainment">🎬 Entertainment</option>
+                    <option value="Bills">💡 Bills</option>
+                    <option value="Other">📦 Other</option>
+                  </select>
+                  <span class="field-error" id="error-category"></span>
+                </div>
+
+                <!-- Date Field -->
+                <div class="form-group">
+                  <label for="expense-date" class="form-label">
+                    Date <span class="required-star">*</span>
+                  </label>
+                  <input 
+                    type="date" 
+                    id="expense-date" 
+                    name="date" 
+                    class="form-input" 
+                    required>
+                  <span class="field-error" id="error-date"></span>
+                </div>
+
+                <!-- Payment Method Field -->
+                <div class="form-group">
+                  <label for="expense-payment" class="form-label">
+                    Payment Method <span class="required-star">*</span>
+                  </label>
+                  <select id="expense-payment" name="payment" class="form-select" required>
+                    <option value="" disabled selected>Select Payment Method</option>
+                    <option value="UPI">📱 UPI (GPay/PhonePe/Paytm)</option>
+                    <option value="Cash">💵 Cash</option>
+                    <option value="Debit Card">💳 Debit Card</option>
+                    <option value="Credit Card">💳 Credit Card</option>
+                    <option value="Other">🌐 Other</option>
+                  </select>
+                  <span class="field-error" id="error-payment"></span>
+                </div>
+
+                <!-- Description / Notes Field -->
+                <div class="form-group span-2">
+                  <label for="expense-description" class="form-label">
+                    Description / Notes <span class="optional-label">(Optional)</span>
+                  </label>
+                  <textarea 
+                    id="expense-description" 
+                    name="description" 
+                    class="form-textarea" 
+                    rows="3" 
+                    placeholder="Add any extra notes (e.g., Shared with roommates, Receipt #402)..." 
+                    maxlength="200"></textarea>
+                  <div class="char-count"><span id="char-counter">0</span> / 200</div>
+                </div>
+              </div>
+
+              <!-- Form Buttons -->
+              <div class="form-actions-row">
+                <button type="submit" id="form-submit-btn" class="btn btn-primary">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span id="submit-btn-text">Save Expense</span>
+                </button>
+                <button type="button" id="form-reset-btn" class="btn btn-secondary">
+                  Reset Form
+                </button>
+              </div>
+            </form>
+          </article>
+        </div>
+      </section>
+
+      <!-- PAGE 4: ANALYTICS VIEW -->
+      <section id="view-analytics" class="page-view" aria-labelledby="analytics-heading">
+        <div class="view-header-row">
+          <div>
+            <h3 id="analytics-heading" class="view-heading">Spending Analytics</h3>
+            <p class="view-subheading">Understand your financial distribution and spending habits across categories.</p>
+          </div>
+        </div>
+
+        <!-- 5 Analytics Summary Cards -->
+        <div class="analytics-metrics-grid">
+          <article class="metric-card">
+            <span class="metric-title">Total Spending</span>
+            <span id="analytics-total-spend" class="metric-value">₹0</span>
+            <span class="metric-subtext">Across all time</span>
+          </article>
+
+          <article class="metric-card">
+            <span class="metric-title">This Month</span>
+            <span id="analytics-month-spend" class="metric-value">₹0</span>
+            <span class="metric-subtext" id="analytics-month-label">Current calendar month</span>
+          </article>
+
+          <article class="metric-card">
+            <span class="metric-title">Top Category</span>
+            <span id="analytics-top-category" class="metric-value">-</span>
+            <span id="analytics-top-category-amount" class="metric-subtext">₹0 spent</span>
+          </article>
+
+          <article class="metric-card">
+            <span class="metric-title">Average Transaction</span>
+            <span id="analytics-avg-spend" class="metric-value">₹0</span>
+            <span class="metric-subtext">Per expense recorded</span>
+          </article>
+
+          <article class="metric-card">
+            <span class="metric-title">Total Logs</span>
+            <span id="analytics-count" class="metric-value">0</span>
+            <span class="metric-subtext">Recorded expenses</span>
+          </article>
+        </div>
+
+        <!-- Visual Horizontal Bar Chart: Category Breakdown -->
+        <article class="card analytics-chart-card">
+          <div class="chart-card-header">
+            <div>
+              <h4 class="card-title">Category-wise Spending Breakdown</h4>
+              <p class="card-subtitle">Horizontal proportion bars calculated dynamically via JavaScript</p>
+            </div>
+            <span class="badge badge-sage">Pure CSS &amp; Vanilla JS</span>
+          </div>
+
+          <div id="analytics-bars-container" class="category-bars-list">
+            <!-- Rendered dynamically by JS -->
+          </div>
+        </article>
+
+        <!-- Secondary Analytics Row: Payment Method Breakdown & Insights -->
+        <div class="dashboard-grid-two">
+          <!-- Payment Method Share -->
+          <article class="card">
+            <h4 class="card-title">Payment Methods Used</h4>
+            <p class="card-subtitle">How you pay for your daily expenses</p>
+            <div id="analytics-payment-breakdown" class="payment-method-list">
+              <!-- Rendered dynamically by JS -->
+            </div>
+          </article>
+
+          <!-- Student Spending Insights -->
+          <article class="card">
+            <h4 class="card-title">Smart Financial Insights</h4>
+            <p class="card-subtitle">Automated observations from your records</p>
+            <div id="analytics-insights-container" class="insights-list">
+              <!-- Rendered dynamically by JS -->
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- PAGE 5: BUDGET MANAGEMENT VIEW -->
+      <section id="view-budget" class="page-view" aria-labelledby="budget-heading">
+        <div class="view-header-row">
+          <div>
+            <h3 id="budget-heading" class="view-heading">Monthly Budget Planner</h3>
+            <p class="view-subheading">Define your monthly spending limit, monitor usage, and prevent overspending.</p>
+          </div>
+        </div>
+
+        <!-- Main Budget Hero Card -->
+        <article class="card budget-hero-card" id="budget-hero-container">
+          <div class="budget-hero-header">
+            <div>
+              <span class="card-subtitle">Current Month Status</span>
+              <h4 id="budget-hero-month" class="budget-month-name">November 2026</h4>
+            </div>
+            <div id="budget-status-pill" class="budget-pill pill-safe">Within Budget</div>
+          </div>
+
+          <!-- Hero Metrics -->
+          <div class="budget-hero-stats">
+            <div class="budget-stat">
+              <span class="budget-stat-label">Monthly Limit</span>
+              <span id="budget-limit-display" class="budget-stat-val">₹6,000</span>
+            </div>
+            <div class="budget-stat">
+              <span class="budget-stat-label">Spent So Far</span>
+              <span id="budget-spent-display" class="budget-stat-val">₹0</span>
+            </div>
+            <div class="budget-stat">
+              <span class="budget-stat-label">Remaining Balance</span>
+              <span id="budget-remaining-display" class="budget-stat-val text-success">₹6,000</span>
+            </div>
+          </div>
+
+          <!-- Main Visual Progress Bar -->
+          <div class="budget-visual-progress">
+            <div class="progress-labels">
+              <span>0%</span>
+              <span id="budget-percentage-text">0% utilized</span>
+              <span>100%</span>
+            </div>
+            <div class="progress-bar-track large-track">
+              <div id="budget-main-progress-bar" class="progress-bar-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+
+          <!-- Alert Callout -->
+          <div id="budget-warning-banner" class="budget-callout callout-info">
+            <span class="callout-icon">ℹ️</span>
+            <p id="budget-warning-text" class="callout-text">You have used 0% of your allocated monthly budget. You're in safe territory!</p>
+          </div>
+        </article>
+
+        <!-- Budget Configuration Card -->
+        <div class="dashboard-grid-two">
+          <article class="card">
+            <h4 class="card-title">Adjust Monthly Budget</h4>
+            <p class="card-subtitle">Set an achievable spending ceiling for this month</p>
+            <form id="budget-update-form" class="budget-settings-form">
+              <div class="form-group">
+                <label for="monthly-budget-input" class="form-label">Monthly Budget (₹)</label>
+                <div class="currency-input-wrap">
+                  <span class="currency-prefix">₹</span>
+                  <input 
+                    type="number" 
+                    id="monthly-budget-input" 
+                    class="form-input has-prefix" 
+                    placeholder="e.g. 6000" 
+                    min="100" 
+                    step="100" 
+                    required>
+                </div>
+                <small class="form-hint">Recommended for college students: ₹4,000 – ₹10,000/month</small>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Update Budget Limit
+              </button>
+            </form>
+          </article>
+
+          <!-- College Budgeting Advice -->
+          <article class="card">
+            <h4 class="card-title">Student Budgeting Guidelines</h4>
+            <p class="card-subtitle">Rule of thumb for sustainable student finances</p>
+            <ul class="budget-tips-list">
+              <li>
+                <strong>The 50/30/20 Rule:</strong> 50% for Needs (mess fees, books, transport), 30% for Wants (outings, shopping), and 20% for Savings or emergency cushion.
+              </li>
+              <li>
+                <strong>Weekly Sub-budgets:</strong> Divide your monthly limit by 4 to keep track of weekly spending velocity.
+              </li>
+              <li>
+                <strong>Group Expenses:</strong> For shared flat or hostel snacks, log your exact share to avoid hidden drain.
+              </li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <!-- PAGE 6: SETTINGS VIEW -->
+      <section id="view-settings" class="page-view" aria-labelledby="settings-heading">
+        <div class="view-header-row">
+          <div>
+            <h3 id="settings-heading" class="view-heading">Settings &amp; Preferences</h3>
+            <p class="view-subheading">Customize your theme, configure defaults, export records, or reset data.</p>
+          </div>
+        </div>
+
+        <div class="settings-grid">
+          <!-- Appearance -->
+          <article class="card settings-card">
+            <div class="settings-card-header">
+              <div class="settings-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="card-title">Theme &amp; Appearance</h4>
+                <p class="card-subtitle">Choose between Nature-inspired Sage Light or Forest Dark mode</p>
+              </div>
+            </div>
+            <div class="settings-row">
+              <div>
+                <strong>Color Theme</strong>
+                <p class="text-muted">Persistent in LocalStorage</p>
+              </div>
+              <div class="theme-toggle-options">
+                <button type="button" class="btn btn-secondary theme-choice-btn" data-theme-choice="light">
+                  ☀️ Light (Sage &amp; Cream)
+                </button>
+                <button type="button" class="btn btn-secondary theme-choice-btn" data-theme-choice="dark">
+                  🌙 Dark (Forest Charcoal)
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Budget Preset -->
+          <article class="card settings-card">
+            <div class="settings-card-header">
+              <div class="settings-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 12V8H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h12v4"></path>
+                  <path d="M4 6v12a2 2 0 0 0 2 2h14v-4"></path>
+                  <circle cx="18" cy="12" r="1"></circle>
+                </svg>
+              </div>
+              <div>
+                <h4 class="card-title">Default Monthly Budget</h4>
+                <p class="card-subtitle">Current monthly limit setting</p>
+              </div>
+            </div>
+            <div class="settings-row">
+              <div>
+                <strong>Active Budget</strong>
+                <p class="text-muted" id="settings-budget-label">₹6,000 per month</p>
+              </div>
+              <button class="btn btn-secondary" data-nav-target="budget">Change in Budget Tab</button>
+            </div>
+          </article>
+
+          <!-- Data Backup & Export -->
+          <article class="card settings-card">
+            <div class="settings-card-header">
+              <div class="settings-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                  <polyline points="7 10 12 15 17 10"></polyline>
+                  <line x1="12" y1="15" x2="12" y2="3"></line>
+                </svg>
+              </div>
+              <div>
+                <h4 class="card-title">Data Backup &amp; Demo Data</h4>
+                <p class="card-subtitle">Export records or load realistic student starter transactions</p>
+              </div>
+            </div>
+            <div class="settings-row">
+              <div>
+                <strong>Export Expense History</strong>
+                <p class="text-muted">Download all entries as a CSV spreadsheet</p>
+              </div>
+              <button id="settings-export-csv-btn" class="btn btn-secondary">
+                Download CSV
+              </button>
+            </div>
+            <div class="settings-row">
+              <div>
+                <strong>Load Sample Student Data</strong>
+                <p class="text-muted">Populate realistic demo transactions for viva &amp; evaluation</p>
+              </div>
+              <button id="load-sample-btn" class="btn btn-secondary">
+                Load Demo Data
+              </button>
+            </div>
+          </article>
+
+          <!-- Danger Zone -->
+          <article class="card settings-card danger-card">
+            <div class="settings-card-header">
+              <div class="settings-icon-wrap icon-rose">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 6h18"></path>
+                  <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                </svg>
+              </div>
+              <div>
+                <h4 class="card-title text-error">Danger Zone</h4>
+                <p class="card-subtitle">Irreversible storage operations</p>
+              </div>
+            </div>
+            <div class="settings-row">
+              <div>
+                <strong>Clear All Expense Records</strong>
+                <p class="text-muted">Delete all transactions stored in your browser's LocalStorage</p>
+              </div>
+              <button id="clear-all-data-btn" class="btn btn-danger">
+                Clear All Expenses
+              </button>
+            </div>
+          </article>
+
+          <!-- About Project Card -->
+          <article class="card settings-card about-card">
+            <h4 class="card-title">About SPENDLY</h4>
+            <p class="about-tagline"><strong>Tagline:</strong> Your money. Your control.</p>
+            <p class="about-desc">
+              Developed as part of <strong>Web Technology Assignment 4</strong> (15 Marks) by a 2nd-year BTech CSE student. Built purely with semantic HTML5, modern CSS3 (Grid &amp; Flexbox), and Vanilla JavaScript without any external frameworks.
+            </p>
+            <div class="tech-tags">
+              <span class="tech-tag">HTML5 Semantic</span>
+              <span class="tech-tag">CSS3 Variables</span>
+              <span class="tech-tag">Flexbox &amp; Grid</span>
+              <span class="tech-tag">Vanilla JS ES6</span>
+              <span class="tech-tag">LocalStorage API</span>
+              <span class="tech-tag">CRUD Architecture</span>
+              <span class="tech-tag">Array Methods (map, filter, reduce, sort)</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- App Footer -->
+      <footer class="app-footer">
+        <p><strong>SPENDLY</strong> &copy; 2026 – Smart Expense Manager | Web Technology Assignment 4 | Pure Vanilla HTML, CSS &amp; JavaScript</p>
+      </footer>
+    </main>
+  </div>
+
+  <!-- MODAL: Confirmation for Single Delete -->
+  <div id="delete-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="delete-modal-title">
+    <div class="modal-card">
+      <div class="modal-icon-wrap icon-rose">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+      </div>
+      <h4 id="delete-modal-title" class="modal-title">Delete Transaction?</h4>
+      <p id="delete-modal-desc" class="modal-desc">Are you sure you want to delete this expense record? You will be able to undo this immediately after deletion.</p>
+      <div class="modal-actions">
+        <button id="cancel-delete-btn" class="btn btn-secondary">Cancel</button>
+        <button id="confirm-delete-btn" class="btn btn-danger">Yes, Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: Confirmation for Clear All Data -->
+  <div id="clear-all-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="clear-modal-title">
+    <div class="modal-card">
+      <div class="modal-icon-wrap icon-rose">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+          <line x1="12" y1="9" x2="12" y2="13"></line>
+          <line x1="12" y1="17" x2="12.01" y2="17"></line>
+        </svg>
+      </div>
+      <h4 id="clear-modal-title" class="modal-title">Clear All Expense Records?</h4>
+      <p class="modal-desc">This action will delete all stored expense records from your browser's LocalStorage. This action cannot be undone.</p>
+      <div class="modal-actions">
+        <button id="cancel-clear-btn" class="btn btn-secondary">Cancel</button>
+        <button id="confirm-clear-btn" class="btn btn-danger">Clear Everything</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container (Floating) -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- JAVASCRIPT FILES (Ordered execution) -->
+  <!-- 1. Storage helper & LocalStorage management -->
+  <script src="js/storage.js"></script>
+  <!-- 2. Expenses management, CRUD, Filters, Sorting -->
+  <script src="js/expenses.js"></script>
+  <!-- 3. Dashboard views & metric calculations -->
+  <script src="js/dashboard.js"></script>
+  <!-- 4. Spending Analytics & Category Bar Charts -->
+  <script src="js/analytics.js"></script>
+  <!-- 5. App entry point, navigation, event listeners & initialization -->
+  <script src="js/app.js"></script>
+</body>
+</html>
